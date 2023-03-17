@@ -27,7 +27,9 @@ export class AuthService {
 
   public get apiHeaders() {
     return {
-      apiKey: this.apiKey,
+      headers: {
+        'x-api-key': this.apiKey,
+      },
     };
   }
 }

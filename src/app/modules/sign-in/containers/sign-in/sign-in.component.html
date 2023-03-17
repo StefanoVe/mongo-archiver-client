@@ -1,16 +1,15 @@
 <div class="h-screen w-screen overflow-hidden">
   <div class="h-full w-full center">
-    <div class="container secondary w-fit max-w-[25rem]">
-      <div class="text-center">
-        <h1 class="text-4xl font-extrabold">Connect</h1>
-        <h4 class="text-slate-500 mt-1">
-          Connect to your backend to view and download your backups.
-        </h4>
+    <div>
+      <div class="container secondary w-fit max-w-[25rem]">
+        <div class="text-center">
+          <h1 class="text-4xl font-extrabold">Connect</h1>
+          <h4 class="text-slate-500 mt-1">
+            Connect to your backend to easily view and download backups.
+          </h4>
+        </div>
+        <app-sign-in-form></app-sign-in-form>
       </div>
-      <app-sign-in-form
-        (pingServer)="pingSubject$.next($event)"
-      ></app-sign-in-form>
-      <app-ping [pingServer]="pingSubject$"></app-ping>
     </div>
   </div>
 </div>

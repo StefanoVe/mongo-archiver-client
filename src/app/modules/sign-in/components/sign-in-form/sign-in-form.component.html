@@ -1,5 +1,5 @@
 <div class="flex flex-col space-y-4 my-4">
-  <form [formGroup]="form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <!-- Backend URL -->
     <golden-tailwind-input
       name="url"
@@ -15,10 +15,17 @@
       label="Api Key"
       [parent]="form"
     ></golden-tailwind-input>
-    <div>
+    <div class="flex justify-end space-x-2">
+      <app-ping
+        [pingServer]="pingSubject$"
+        class="mt-7"
+        (pingResult)="pingResult = $event"
+      ></app-ping>
+
       <golden-tailwind-submit-button
-        label="Connect"
-        [invalid]="form.invalid"
+        label="Confirm"
+        [loading]="loading"
+        [invalid]="form.invalid || pingResult !== 'success'"
       ></golden-tailwind-submit-button>
     </div>
   </form>

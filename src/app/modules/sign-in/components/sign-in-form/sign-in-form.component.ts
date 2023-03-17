@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { debounceTime, tap } from 'rxjs';
+import { debounceTime, Subject, tap } from 'rxjs';
+import { IPingStatus } from 'src/app/modules/shared/ping/ping.component';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -8,10 +9,17 @@ import { debounceTime, tap } from 'rxjs';
   styleUrls: ['./sign-in-form.component.scss'],
 })
 export class SignInFormComponent implements OnInit {
-  @Output() pingServer = new EventEmitter<{
+  @Input() loading = false;
+  @Output() formSubmitted = new EventEmitter<{
     url: string;
     apiKey: string;
   }>();
+
+  public pingSubject$ = new Subject<{
+    url: string;
+    apiKey: string;
+  }>();
+  public pingResult: IPingStatus = '';
 
   public form: FormGroup = new FormGroup({
     url: new FormControl('', [
@@ -34,9 +42,19 @@ export class SignInFormComponent implements OnInit {
             return;
           }
 
-          this.pingServer.emit(v);
+          console.log('emitting', v);
+          this.pingSubject$.next(v);
         })
       )
       .subscribe();
+  }
+
+  public onSubmit() {
+    if (!this.form.valid || this.pingResult !== 'success') {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    this.formSubmitted.emit(this.form.value);
   }
 }
