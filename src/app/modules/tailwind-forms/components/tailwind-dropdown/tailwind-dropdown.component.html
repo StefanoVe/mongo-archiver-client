@@ -1,0 +1,77 @@
+<div class="overflow-hidden rounded text-sm font-medium" [formGroup]="parent">
+  <span>{{ label }}</span>
+  <div class="group" #wrapper>
+    <button
+      type="button"
+      class="hover:bg-gray-100 w-full rounded-lg p-2 border font-medium shadow text-gray-500 space-x-2"
+    >
+      <span
+        class="float-left whitespace-nowrap overflow-hidden truncate pr-6"
+        >{{ selectedOption()?.name || placeholder | titlecase }}</span
+      >
+
+      <div class="flex justify-end">
+        <svg
+          class="mb-2 h-6 w-6 fill-current absolute p-1 rounded"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 129 129"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          enable-background="new 0 0 129 129"
+        >
+          <g>
+            <path
+              d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z"
+            />
+          </g>
+        </svg>
+      </div>
+    </button>
+    <div
+      class="my-2 rounded-lg shadow-md p-2 border absolute z-50 h-50 bg-white w-[32rem] hidden group-focus-within:block"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="w-6 h-6 absolute my-3 ml-4"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      <div class="flex justify-center">
+        <input
+          #searchInput
+          type="text"
+          class="w-full rounded-lg pl-10 p-2 border border-gray-300 outline-none focus:ring m-1"
+          placeholder="Cerca..."
+          (keyup)="onModelChange(searchInput.value)"
+        />
+      </div>
+
+      <select
+        #selectElement
+        [id]="name"
+        [name]="name"
+        (change)="
+          handleSelectItem($any($event.target).value); selectElement.blur()
+        "
+        [formControlName]="name"
+        multiple
+        class="block w-full appearance-none rounded-md border border-gray-300 py-2 placeholder-gray-400 shadow-sm focus:outline-none sm:text-sm divide-y"
+      >
+        <option
+          #dropdownOption
+          id="dropdown-option-{{ i }}"
+          *ngFor="let option of filteredItems() | slice : 0 : 50; let i = index"
+          [value]="option.value"
+          class="block cursor-pointer bg-white p-2 text-black hover:bg-gray-100 overflow-hidden focus:bg-none"
+          [innerHTML]="option.name | titlecase"
+        ></option>
+      </select>
+    </div>
+  </div>
+</div>

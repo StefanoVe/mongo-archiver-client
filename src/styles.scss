@@ -2,3 +2,37 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+html {
+  font-family: Inter var, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+    Noto Color Emoji;
+}
+
+//center a div
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+//declare a variable called "primary-color" and set it to the hex of tailwind's blue-500
+
+//secondary-color is a variable that is set to the hex of tailwind's green-300
+:root {
+  --primary-color: #3b82f6;
+  --secondary-color: #10b981;
+}
+
+.container {
+  @apply p-5 rounded-2xl bg-gray-50 border shadow text-slate-900;
+
+  &.primary {
+    @apply border-primary shadow-primary/30;
+  }
+
+  &.secondary {
+    @apply border-secondary shadow-secondary/30;
+  }
+}

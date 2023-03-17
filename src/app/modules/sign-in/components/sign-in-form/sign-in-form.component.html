@@ -1,1 +1,25 @@
-<p>sign-in-form works!</p>
+<div class="flex flex-col space-y-4 my-4">
+  <form [formGroup]="form">
+    <!-- Backend URL -->
+    <golden-tailwind-input
+      name="url"
+      label="URL"
+      [parent]="form"
+    ></golden-tailwind-input>
+
+    <!-- API_Key -->
+    <golden-tailwind-input
+      name="apiKey"
+      type="password"
+      [showToggleEye]="true"
+      label="Api Key"
+      [parent]="form"
+    ></golden-tailwind-input>
+    <div>
+      <golden-tailwind-submit-button
+        label="Connect"
+        [invalid]="form.invalid"
+      ></golden-tailwind-submit-button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,55 @@
+<div [formGroup]="parent" class="mb-4">
+  <label
+    [for]="name"
+    class="block text-sm font-medium text-gray-700 truncate"
+    id="select-label"
+  >
+    {{ label | titlecase }}
+  </label>
+  <div class="relative mt-1 flex group">
+    <select
+      [id]="name"
+      [name]="name"
+      [formControlName]="name"
+      class="focus:ring-app-color-500 focus:border-app-color-500 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:outline-none sm:text-sm group-hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50"
+      [ngClass]="{
+        'border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500':
+          showValidationErrors
+      }"
+    >
+      <option value="" *ngIf="!validationErrors['required']" class="truncate">
+        {{ placeholder }}
+      </option>
+      <option
+        *ngFor="let option of options"
+        [selected]="false"
+        [value]="option.value"
+        class="truncate"
+      >
+        {{ option.name }}
+      </option>
+    </select>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-6 h-6 absolute right-0 m-2 bg-white group-hover:bg-gray-50 rounded-lg"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+      />
+    </svg>
+  </div>
+
+  <p
+    class="mt-2 text-sm text-red-600"
+    [id]="name + '-error'"
+    *ngIf="showValidationErrors"
+  >
+    {{ validationErrorMessage }}
+  </p>
+</div>
