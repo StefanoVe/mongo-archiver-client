@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, Subject, tap } from 'rxjs';
-import { IPingStatus } from 'src/app/modules/shared/ping/ping.component';
+import { IPingStatus } from 'src/app/modules/shared/components/ping/ping.component';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -42,7 +42,6 @@ export class SignInFormComponent implements OnInit {
             return;
           }
 
-          console.log('emitting', v);
           this.pingSubject$.next(v);
         })
       )

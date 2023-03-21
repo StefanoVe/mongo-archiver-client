@@ -103,7 +103,8 @@ dist
 # TernJS port file
 .tern-port
 
+#ignore macos files across the whole project
+.DS_Store
 
-.DS_store
 
 .angular

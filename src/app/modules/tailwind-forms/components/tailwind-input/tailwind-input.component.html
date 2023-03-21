@@ -6,7 +6,7 @@
   <label
     [for]="name"
     id="input-label"
-    class="block text-sm font-medium text-gray-700"
+    class="block text-sm font-medium text-gray-700 dark:text-white"
   >
     {{ label }}
   </label>
@@ -23,7 +23,7 @@
       [suffix]="suffix"
       [thousandSeparator]="thousandSeparator"
       [patterns]="patterns"
-      class="focus:ring-app-main-color-500 focus:border-app-main-color-500 block w-full appearance-none rounded-lg border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:outline-none sm:text-sm"
+      class="focus:ring-primary focus:border-primary block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:outline-none sm:text-sm form-style dark:bg-app-dark-mode-color-400 dark:text-white"
       [ngClass]="{
         'border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:ring-red-500':
           showValidationErrors,

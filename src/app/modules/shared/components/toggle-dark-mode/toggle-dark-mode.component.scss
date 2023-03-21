@@ -1,0 +1,14 @@
+.dark-mode-button
+{
+    @apply rounded-lg p-2 flex space-x-1 cursor-pointer 
+}
+
+.svg-icon
+{
+    @apply w-6 h-6 transition-all duration-300
+}
+
+.inactive
+{
+    @apply opacity-0 absolute -translate-x-2
+}
