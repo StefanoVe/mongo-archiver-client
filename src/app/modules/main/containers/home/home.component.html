@@ -12,6 +12,7 @@
           'M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z'
         ]"
       ></app-stat>
+
       <app-stat
         title="Databases"
         [value]="(databases$ | async)?.length || '?'"
@@ -37,8 +38,25 @@
   <div
     class="flex flex-col lg:flex-row justify-around space-y-10 lg:space-y-0 lg:space-x-10"
   >
-    <div class="container secondary">Widget backups recenti</div>
-
-    <div class="container primary">Widget backups in coda</div>
+    <div class="w-full">
+      <app-items-list-widget
+        tableTitle="Latest Backups"
+        [items]="backupsWidget"
+        [headers]="['Job', 'Date', 'TTC']"
+        containerColor="secondary"
+        showMoreRoute="/backup/browse"
+        (refreshData)="refresh('backups')"
+      ></app-items-list-widget>
+    </div>
+    <div class="w-full">
+      <app-items-list-widget
+        tableTitle="Cron jobs queue"
+        [items]="cronJobsWidget"
+        [headers]="['Alias', 'Next run', 'Dbs']"
+        containerColor="caution"
+        showMoreRoute="/cron/browse"
+        (refreshData)="refresh('cronjobs')"
+      ></app-items-list-widget>
+    </div>
   </div>
 </div>

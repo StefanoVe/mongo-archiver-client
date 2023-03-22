@@ -16,7 +16,7 @@ export interface Backup {
   createdAt: Date;
   updatedAt: Date;
 
-  cronJob: CronJob['expression'];
+  cronJob: CronJob;
   databases: Database[];
   dateEnd: Date;
   data: Uint8Array | string;

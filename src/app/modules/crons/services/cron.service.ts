@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { parseExpression } from 'cron-parser';
 import { ReplaySubject, Subject, tap } from 'rxjs';
 import { ApiHttpService } from '../../api-http';
 import { Database } from '../../databases/services/databases.service';
@@ -31,7 +32,7 @@ export class CronsService {
   }
 
   public getCronJobs<T = CronJob[]>(id?: string) {
-    return this.apiHttp.get('/api/cron/get').pipe(
+    return this.apiHttp.get('api/cron/get').pipe(
       tap((r) => {
         if (id?.length) {
           return;
@@ -40,5 +41,10 @@ export class CronsService {
         this.cronjobs$.next(r as unknown as CronJob[]);
       })
     );
+  }
+
+  public cronJobToDate(cronJob: string) {
+    //convert a cron expression to the nearest date of execution
+    return parseExpression(cronJob).next().toDate();
   }
 }
