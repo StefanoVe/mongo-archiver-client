@@ -1,3 +1,44 @@
-<div class="container secondary">Widget backups recenti</div>
+<div class="m-2 lg:m-10 space-y-10 w-[90vw]">
+  <div class="flex justify-center w-full">
+    <div
+      class="flex flex-col lg:flex-row justify-around lg:w-full space-y-4 lg:space-y-0"
+    >
+      <app-stat
+        title="Backups"
+        [value]="(backups$ | async)?.length || '?'"
+        svgBgColor="bg-green-400 dark:bg-green-600 text-white"
+        [svgPaths]="[
+          'M3.087 9l.54 9.176A3 3 0 006.62 21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zm6.163 3.75A.75.75 0 0110 12h4a.75.75 0 010 1.5h-4a.75.75 0 01-.75-.75z',
+          'M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z'
+        ]"
+      ></app-stat>
+      <app-stat
+        title="Databases"
+        [value]="(databases$ | async)?.length || '?'"
+        svgBgColor="bg-blue-400 dark:bg-blue-600 text-white"
+        [svgPaths]="[
+          'M21 6.375c0 2.692-4.03 4.875-9 4.875S3 9.067 3 6.375 7.03 1.5 12 1.5s9 2.183 9 4.875z',
+          'M12 12.75c2.685 0 5.19-.586 7.078-1.609a8.283 8.283 0 001.897-1.384c.016.121.025.244.025.368C21 12.817 16.97 15 12 15s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.285 8.285 0 001.897 1.384C6.809 12.164 9.315 12.75 12 12.75z',
+          'M12 16.5c2.685 0 5.19-.586 7.078-1.609a8.282 8.282 0 001.897-1.384c.016.121.025.244.025.368 0 2.692-4.03 4.875-9 4.875s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.284 8.284 0 001.897 1.384C6.809 15.914 9.315 16.5 12 16.5z',
+          'M12 20.25c2.685 0 5.19-.586 7.078-1.609a8.282 8.282 0 001.897-1.384c.016.121.025.244.025.368 0 2.692-4.03 4.875-9 4.875s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.284 8.284 0 001.897 1.384C6.809 19.664 9.315 20.25 12 20.25z'
+        ]"
+      ></app-stat>
 
-<div class="container primary">Widget backups in coda</div>
+      <app-stat
+        title="Cron Jobs"
+        [value]="(crons$ | async)?.length || '?'"
+        svgBgColor="bg-purple-400 dark:bg-purple-600 text-white"
+        [svgPaths]="[
+          'M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z'
+        ]"
+      ></app-stat>
+    </div>
+  </div>
+  <div
+    class="flex flex-col lg:flex-row justify-around space-y-10 lg:space-y-0 lg:space-x-10"
+  >
+    <div class="container secondary">Widget backups recenti</div>
+
+    <div class="container primary">Widget backups in coda</div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  mode: 'jit',
   content: ['./src/**/*.{html,ts}'],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
@@ -25,5 +26,5 @@ module.exports = {
     },
   },
 
-  plugins: [],
+  plugins: [require('tailwindcss-dotted-background')],
 };

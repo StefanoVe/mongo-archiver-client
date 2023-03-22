@@ -1,0 +1,35 @@
+<!-- 
+    IMPORTED FROM https://tailwindcomponents.com/component/statistic-cards
+ -->
+
+<div
+  class="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800 w-80 container muted"
+  style="padding: 0rem"
+>
+  <div class="p-4 flex items-center">
+    <div class="p-3 rounded-full {{ svgBgColor }} mr-4">
+      <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+        <path
+          *ngFor="let path of svgPaths"
+          [attr.d]="path"
+          fill-rule="evenodd"
+        ></path>
+      </svg>
+    </div>
+    <div class="h-[3.45rem]">
+      <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+        {{ title }}
+      </p>
+      <p
+        class="text-lg font-semibold text-gray-700 dark:text-gray-200"
+        *ngIf="value !== null"
+      >
+        {{ value }}
+      </p>
+      <p
+        class="w-full p-3 pt-[0.5rem] skeleton smooth"
+        *ngIf="value === null"
+      ></p>
+    </div>
+  </div>
+</div>

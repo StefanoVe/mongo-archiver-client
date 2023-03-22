@@ -6222,6 +6222,11 @@ symbol-observable@4.0.0:
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-4.0.0.tgz#5b425f192279e87f2f9b937ac8540d1984b39205"
   integrity sha512-b19dMThMV4HVFynSAM1++gBHAbk2Tc/osgLIBZMKsyqh34jb2e8Os7T6ZW/Bt3pJFdBTd2JwAnAAEQV7rSNvcQ==
 
+tailwindcss-dotted-background@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/tailwindcss-dotted-background/-/tailwindcss-dotted-background-1.0.1.tgz#40ceb52310867ca3c26a78aff5d8683ee004d83e"
+  integrity sha512-GvT2O9mKq6tdM958Cyhmm0omV+LuF/wYusHi2SNhZjB2Ft2WLnEQt7QR7ByzUJ2fT94qnW86Mib4tHTJYRLgTA==
+
 tailwindcss@^3.2.7:
   version "3.2.7"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.2.7.tgz#5936dd08c250b05180f0944500c01dce19188c07"
