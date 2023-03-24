@@ -4,6 +4,7 @@ export interface ITableRow {
   column1: string | number;
   column2: string | number;
   column3: string | number;
+  route?: string;
 }
 
 @Component({
@@ -18,6 +19,7 @@ export class ItemsListWidgetComponent {
   @Input() showMoreQueryParams: { [key: string]: string } = {};
   @Input() containerColor: string = 'muted';
   @Input() tableTitle = '';
+  @Input() readOnly = false;
 
   @Output() refreshData = new EventEmitter<void>();
 }

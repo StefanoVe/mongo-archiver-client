@@ -65,6 +65,7 @@ export class HomeComponent implements OnInit {
               new Date(backup.createdAt).valueOf()) /
             1000
           ).toFixed(2) + ' s',
+        route: '/backups/' + backup._id,
       }));
   }
 
@@ -77,6 +78,7 @@ export class HomeComponent implements OnInit {
           'dd/MM HH:mm'
         ),
         column3: cron.databases.length,
+        route: '/crons/' + cron._id,
       }))
       .sort((a, b) => (a.column2 > b.column2 ? 1 : -1));
   }

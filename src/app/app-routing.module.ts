@@ -5,6 +5,11 @@ import { SigninGuard } from './guards/signin.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'pages',
+    pathMatch: 'full',
+  },
+  {
     path: 'pages',
     loadChildren: () =>
       import('./modules/main/main.module').then((m) => m.MainModule),

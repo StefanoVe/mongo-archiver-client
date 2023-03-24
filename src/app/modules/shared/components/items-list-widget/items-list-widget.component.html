@@ -14,7 +14,7 @@
           </h2>
         </header>
         <button
-          class="my-auto rounded-lg hover:bg-gray-100 dark:hover:bg-app-dark-mode-color-400 p-2"
+          class="my-auto rounded-lg hover:bg-gray-100 dark:hover:bg-app-dark-mode-color-400 p-2 group/refresh"
           (click)="refreshData.emit()"
         >
           <svg
@@ -33,7 +33,7 @@
           </svg>
         </button>
       </div>
-      <div class="p-3 h-96 overflow-y-auto">
+      <div class="p-3 h-96 overflow-y-auto overflow-x-hidden">
         <div>
           <table class="table-auto w-full">
             <thead class="text-xs font-semibold uppercase">
@@ -63,7 +63,12 @@
                 <ng-container [ngTemplateOutlet]="SkeletonRow"></ng-container>
                 <ng-container [ngTemplateOutlet]="SkeletonRow"></ng-container>
               </ng-container>
-              <tr *ngFor="let item of items; let i = index">
+              <tr
+                *ngFor="let item of items; let i = index"
+                class="hover:scale-105 smooth cursor-pointer hover:bg-gray-200/80 dark:hover:bg-app-dark-mode-color-400"
+                [class.pointer-events-none]="!item.route || readOnly"
+                [routerLink]="item.route"
+              >
                 <td>
                   <div class="font-semibold text-center">
                     {{ item.column1 }}
