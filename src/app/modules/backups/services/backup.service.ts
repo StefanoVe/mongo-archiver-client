@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject, Subject, tap } from 'rxjs';
 import { ApiHttpService } from 'src/app/modules/api-http';
+import { AuthService } from 'src/app/services/auth.service';
 import { CronJob } from '../../crons/services/cron.service';
 import { Database } from '../../databases/services/databases.service';
 export enum EnumBackupStatus {
@@ -22,6 +23,7 @@ export interface Backup {
   data: Uint8Array | string;
   compression: string;
   backupStatus: EnumBackupStatus;
+  size: number;
   //If there are references to IDs from other documents, use `Types.ObjectId`
 }
 
@@ -35,8 +37,25 @@ export class BackupService {
     return this._backups;
   }
 
-  constructor(private apiHttp: ApiHttpService) {
+  constructor(
+    private apiHttp: ApiHttpService,
+    private _authService: AuthService
+  ) {
     this.getBackups().subscribe();
+  }
+
+  public ttc(backup: Backup) {
+    return (
+      (
+        (new Date(backup.dateEnd).valueOf() -
+          new Date(backup.createdAt).valueOf()) /
+        1000
+      ).toFixed(2) + ' s'
+    );
+  }
+
+  public downloadUrl(backup: Backup) {
+    return `${this._authService.serverUrl}api/backup/download/${backup._id}?apiKey=${this._authService.apiKey}`;
   }
 
   public getBackups<T = Backup[]>(id?: string) {

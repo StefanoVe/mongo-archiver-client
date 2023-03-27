@@ -45,10 +45,11 @@
       <app-items-list-widget
         tableTitle="Latest Backups"
         [items]="backupsWidget"
-        [headers]="['Job', 'Date', 'TTC']"
+        [headers]="['Job', 'Date', 'Size']"
         containerColor="secondary"
-        showMoreRoute="/backup/browse"
+        showMoreRoute="/pages/backups/browse"
         (refreshData)="refresh('backups')"
+        [readOnly]="true"
       ></app-items-list-widget>
     </div>
     <div class="w-full">

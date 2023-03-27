@@ -6,6 +6,8 @@ import { ItemsListWidgetComponent } from './components/items-list-widget/items-l
 import { PingComponent } from './components/ping/ping.component';
 import { StatComponent } from './components/stat/stat.component';
 import { ToggleDarkModeComponent } from './components/toggle-dark-mode/toggle-dark-mode.component';
+import { ItemsTableComponent } from './components/items-table/items-table.component';
+import { BadgeComponent } from './components/badge/badge.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +15,8 @@ import { ToggleDarkModeComponent } from './components/toggle-dark-mode/toggle-da
     ToggleDarkModeComponent,
     StatComponent,
     ItemsListWidgetComponent,
+    ItemsTableComponent,
+    BadgeComponent,
   ],
   imports: [CommonModule, HttpClientModule, RouterModule],
   exports: [
@@ -20,6 +24,8 @@ import { ToggleDarkModeComponent } from './components/toggle-dark-mode/toggle-da
     ToggleDarkModeComponent,
     StatComponent,
     ItemsListWidgetComponent,
+    ItemsTableComponent,
+    BadgeComponent,
   ],
 })
 export class SharedModule {}

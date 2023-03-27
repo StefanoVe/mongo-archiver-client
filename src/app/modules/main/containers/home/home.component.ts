@@ -59,12 +59,7 @@ export class HomeComponent implements OnInit {
       .map((backup) => ({
         column1: backup.cronJob?.alias,
         column2: format(new Date(backup.createdAt), 'dd/MM HH:mm'),
-        column3:
-          (
-            (new Date(backup.dateEnd).valueOf() -
-              new Date(backup.createdAt).valueOf()) /
-            1000
-          ).toFixed(2) + ' s',
+        column3: `${backup.size} MB`,
         route: '/backups/' + backup._id,
       }));
   }

@@ -1,0 +1,40 @@
+<div class="overflow-y-auto max-h-screen">
+  <div
+    class="overflow-hidden rounded-lg container muted shadow-md m-5 flex justify-center w-full"
+  >
+    <table class="w-full">
+      <thead>
+        <tr>
+          <th
+            scope="col"
+            class="px-6 py-4 font-medium uppercase tracking-wider"
+            *ngFor="let item of headers"
+          >
+            {{ item }}
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="divide-y border-t border-gray-800 dark:divide-app-dark-mode-color-50 dark:border-app-dark-mode-color-50"
+      >
+        <tr *ngFor="let row of rows">
+          <td class="px-6 py-6 text-center" *ngFor="let cell of row">
+            <a
+              [attr.href]="cell.url || null"
+              class="text-center"
+              *ngIf="!cell.html"
+            >
+              <span *ngIf="!cell.badge">{{ cell.value }}</span>
+              <app-badge *ngIf="cell.badge" [type]="cell.badge"></app-badge>
+            </a>
+            <span
+              class="text-center"
+              [innerHTML]="cell.html"
+              *ngIf="cell.html"
+            ></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

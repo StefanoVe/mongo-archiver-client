@@ -1,0 +1,11 @@
+.available {
+  @apply text-green-500 ring-green-500;
+}
+
+.pending {
+  @apply text-yellow-500 ring-yellow-500;
+}
+
+.unavailable {
+  @apply text-red-500 ring-red-500;
+}
