@@ -1,0 +1,19 @@
+.dot {
+  @apply p-2 w-10 h-10 rounded-full pulse shadow-lg;
+}
+
+.pulse {
+  animation: riseAndFall 2s infinite alternate ease-in-out;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+@keyframes riseAndFall {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
