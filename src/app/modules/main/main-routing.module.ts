@@ -23,10 +23,14 @@ const routes: Routes = [
         path: 'signout',
         component: SignoutComponent,
       },
-      // {
-      //   path: 'databases',
-      //   component: NavComponent,
-      // },
+      {
+        path: 'databases',
+        canActivate: [ConnectedGuard],
+        loadChildren: () =>
+          import('../databases/databases.module').then(
+            (m) => m.DatabasesModule
+          ),
+      },
       {
         path: 'backups',
         canActivate: [ConnectedGuard],

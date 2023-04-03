@@ -17,7 +17,7 @@
     ></golden-tailwind-input>
     <div class="flex justify-end space-x-2">
       <app-ping
-        [pingServer]="pingSubject$"
+        [pingServer$]="pingSubject$"
         class="mt-7"
         (pingResult)="pingResult = $event"
       ></app-ping>

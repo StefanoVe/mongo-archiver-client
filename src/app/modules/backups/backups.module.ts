@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 
 import { BackupsRoutingModule } from './backups-routing.module';
+import { BackupsComponent } from './containers/backups/backups.component';
 import { BackupService } from './services/backup.service';
-import { BackupsComponent } from './services/containers/backups/backups.component';
 
 @NgModule({
   declarations: [BackupsComponent],

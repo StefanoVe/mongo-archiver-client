@@ -2,24 +2,30 @@ import { HttpClient } from '@angular/common/http';
 import {
   Component,
   EventEmitter,
+  Inject,
+  InjectionToken,
   Input,
   OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {
-  catchError,
-  Observable,
-  Subject,
-  switchMap,
-  takeUntil,
-  tap,
-} from 'rxjs';
+import { catchError, merge, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 export type IPingStatus = 'pending' | 'success' | 'error' | '';
 
+export interface IPingServer {
+  url?: string;
+  apiKey?: string;
+}
+
+interface IContext {
+  pingType?: 'Express' | 'MongoDB';
+  pingServer$?: Subject<IPingServer>;
+}
+
+export const PING_DATA_TOKEN = new InjectionToken<any>('pingDataToken');
 @Component({
   selector: 'app-ping',
   templateUrl: './ping.component.html',
@@ -27,17 +33,16 @@ export type IPingStatus = 'pending' | 'success' | 'error' | '';
 })
 export class PingComponent implements OnInit, OnDestroy {
   @Input() iconClass = 'h-6 w-6';
-  @Input() pingType: 'Express' | 'MongoDB' = 'Express';
-  @Input() pingServer = new Observable<{
-    url: string;
-    apiKey?: string;
-    mongodbUrl?: string;
-  }>();
+  @Input() pingType: 'Express' | 'MongoDB';
+  @Input() pingServer$: Subject<IPingServer>;
 
   @Output() pingResult = new EventEmitter<IPingStatus>();
 
-  public pingStatus = new FormControl('');
+  public ping$ = new Subject<IPingServer>();
   private _destroy$ = new Subject<void>();
+
+  public pingStatus = new FormControl('');
+  public latestPing: IPingServer | null = null;
 
   public get status() {
     return this.pingStatus.value;
@@ -45,20 +50,26 @@ export class PingComponent implements OnInit, OnDestroy {
 
   constructor(
     private httpClient: HttpClient,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    @Inject(PING_DATA_TOKEN) public context: IContext
+  ) {
+    this.pingType = this.context.pingType || 'Express';
+    this.pingServer$ = this.context.pingServer$ || new Subject<IPingServer>();
+  }
 
   ngOnInit(): void {
-    this.pingServer
+    const _subj$ = [this.pingServer$, this.ping$];
+
+    merge(..._subj$)
       .pipe(
         takeUntil(this._destroy$),
         tap(() => this.pingStatus.setValue('pending')),
+        tap((v) => (this.latestPing = v)),
         switchMap((v) =>
           this.pingType === 'Express'
-            ? this._pingExpress(v.url, v.apiKey)
-            : this._pingMongoDB(v.mongodbUrl)
+            ? this._pingExpress(v?.url || '', v.apiKey)
+            : this._pingMongoDB(v.url)
         ),
-
         catchError(async () => this._catchError())
       )
       .subscribe();
@@ -91,9 +102,9 @@ export class PingComponent implements OnInit, OnDestroy {
     //and return the response
     return this.httpClient
       .post(
-        `${this.authService.apiKey}/api/db/connection/test`,
+        `${this.authService.serverUrl}api/db/connection/test`,
         {
-          mongodbUrl: mongodbUrl || '',
+          url: mongodbUrl || '',
         },
         this.authService.apiHeaders
       )

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BackupsComponent } from './services/containers/backups/backups.component';
+import { BackupsComponent } from './containers/backups/backups.component';
 
 const routes: Routes = [
   {

@@ -1,9 +1,0 @@
-<app-loading *ngIf="!(backups$ | async)"></app-loading>
-
-<div class="center w-full h-full" *ngIf="backups$ | async as backups">
-  <app-items-table
-    class="w-full"
-    [headers]="['job', 'date', 'status', 'size', 'ttc', 'databases', '']"
-    [rows]="backupsTable(backups)"
-  ></app-items-table>
-</div>

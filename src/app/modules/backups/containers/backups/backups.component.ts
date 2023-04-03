@@ -1,15 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { format } from 'date-fns';
+import { tap } from 'rxjs';
 import { TableCell } from 'src/app/modules/shared/components/items-table/items-table.component';
-import { Backup, BackupService, EnumBackupStatus } from '../../backup.service';
+import {
+  Backup,
+  BackupService,
+  EnumBackupStatus,
+} from '../../services/backup.service';
 
 @Component({
   templateUrl: './backups.component.html',
   styleUrls: ['./backups.component.scss'],
 })
 export class BackupsComponent implements OnInit {
-  backups$ = this._backupsService.backups$;
+  public backups$ = this._backupsService.backups$.pipe(
+    tap((s) => {
+      this.table = this.backupsTable(s);
+      //? doesn't work without this timeout, i don't know why
+      setTimeout(() => {
+        this.loading = false;
+      }, 1);
+    })
+  );
+  public loading = true;
+  public table: TableCell[][] = [];
 
   constructor(
     private _backupsService: BackupService,
@@ -63,6 +78,11 @@ export class BackupsComponent implements OnInit {
                 </svg>
               </button>
               <a>
+              <button ${
+                backup.backupStatus !== EnumBackupStatus.SUCCESS
+                  ? `class="pointer-events-none opacity-50"`
+                  : ''
+              }"  >
               <a class="hover:text-purple-500" href="${this._backupsService.downloadUrl(
                 backup
               )}">
@@ -71,6 +91,7 @@ export class BackupsComponent implements OnInit {
                   <path d="M7.151 21.75a2.999 2.999 0 002.599 1.5h7.5a3 3 0 003-3v-7.5c0-1.11-.603-2.08-1.5-2.599v7.099a4.5 4.5 0 01-4.5 4.5H7.151z" />
                 </svg>
             </a>
+            </button>
               </a>
             </div>
           </td>`),

@@ -56,7 +56,7 @@
       <app-items-list-widget
         tableTitle="Cron jobs queue"
         [items]="cronJobsWidget"
-        [headers]="['Alias', 'Next run', 'Databases']"
+        [headers]="['Job', 'Next run', 'Databases']"
         containerColor="caution"
         showMoreRoute="/cron/browse"
         (refreshData)="refresh('cronjobs')"

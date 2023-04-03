@@ -5,10 +5,13 @@ import { RouterModule } from '@angular/router';
 import { BadgeComponent } from './components/badge/badge.component';
 import { ItemsListWidgetComponent } from './components/items-list-widget/items-list-widget.component';
 import { ItemsTableComponent } from './components/items-table/items-table.component';
-import { PingComponent } from './components/ping/ping.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import {
+  PingComponent,
+  PING_DATA_TOKEN,
+} from './components/ping/ping.component';
 import { StatComponent } from './components/stat/stat.component';
 import { ToggleDarkModeComponent } from './components/toggle-dark-mode/toggle-dark-mode.component';
-import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,12 @@ import { LoadingComponent } from './components/loading/loading.component';
     ItemsTableComponent,
     BadgeComponent,
     LoadingComponent,
+  ],
+  providers: [
+    {
+      provide: PING_DATA_TOKEN,
+      useValue: {},
+    },
   ],
 })
 export class SharedModule {}
