@@ -6,6 +6,8 @@
       class="w-full"
       [headers]="['Alias', 'created', 'enabled', 'Status', '']"
       [rows]="table"
+      containerColor="primary"
+      addItemRoute="/pages/databases/add"
       (buttonClicked)="
         pingSubjects$[$event.index].next({
           url: $event.row[$event.row.length - 1].data

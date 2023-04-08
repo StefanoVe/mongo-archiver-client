@@ -1,6 +1,8 @@
 <div class="overflow-y-auto max-h-screen">
   <div
-    class="overflow-hidden rounded-lg container muted shadow-md m-5 flex justify-center w-full"
+    class="overflow-hidden rounded-lg container {{
+      containerColor
+    }} shadow-md m-5 flex justify-center w-full backdrop-blur-sm"
   >
     <table class="w-full">
       <thead>
@@ -17,6 +19,30 @@
       <tbody
         class="divide-y border-t border-gray-800 dark:divide-app-dark-mode-color-50 dark:border-app-dark-mode-color-50"
       >
+        <tr *ngIf="addItemRoute?.length" [routerLink]="addItemRoute">
+          <td colspan="12" class="text-center font-medium text-lg">
+            <button
+              class="center w-full p-4 hover:scale-110 dark:hover:brightness-105 hover:brightness-95 dark:bg-app-dark-mode-color-500 bg-gray-50 smooth"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
+
+              <span>Add Item</span>
+            </button>
+          </td>
+        </tr>
         <tr *ngFor="let row of rows; let i = index">
           <ng-container *ngFor="let cell of row">
             <td class="px-6 py-6 text-center h-20" *ngIf="!cell.data">

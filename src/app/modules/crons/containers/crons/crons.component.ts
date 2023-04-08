@@ -3,19 +3,15 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { format } from 'date-fns';
 import { Subject, tap } from 'rxjs';
 import { TableCell } from 'src/app/modules/shared/components/items-table/items-table.component';
-import {
-  IPingServer,
-  PING_DATA_TOKEN,
-  PingComponent,
-} from 'src/app/modules/shared/components/ping/ping.component';
-import { Database, DatabasesService } from '../../services/databases.service';
+import { IPingServer } from 'src/app/modules/shared/components/ping/ping.component';
+import { CronJob, CronsService } from '../../services/cron.service';
 
 @Component({
-  templateUrl: './databases.component.html',
-  styleUrls: ['./databases.component.scss'],
+  templateUrl: './crons.component.html',
+  styleUrls: ['./crons.component.scss'],
 })
-export class DatabasesComponent implements OnInit {
-  public databases = this._databasesService.databases$.pipe(
+export class CronsComponent implements OnInit {
+  public databases = this._cronsService.cronjobs$.pipe(
     tap((dbs) => {
       this.table = this.backupsTable(dbs);
 
@@ -23,10 +19,6 @@ export class DatabasesComponent implements OnInit {
       setTimeout(() => {
         this.loading = false;
       }, 1);
-
-      setTimeout(() => {
-        this._checkStatus();
-      }, 2);
     })
   );
 
@@ -35,37 +27,30 @@ export class DatabasesComponent implements OnInit {
   public pingSubjects$: Subject<IPingServer>[] = [];
 
   constructor(
-    private _databasesService: DatabasesService,
+    private _cronsService: CronsService,
     private _sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {}
 
-  public backupsTable(dbs: Database[]) {
+  public backupsTable(dbs: CronJob[]) {
     return dbs
       .sort((a, b) => (new Date(a.createdAt) > new Date(b.createdAt) ? -1 : 1))
-      .reduce((acc: TableCell[][], db) => {
+      .reduce((acc: TableCell[][], cron) => {
         const _subj$: Subject<IPingServer> = new Subject<IPingServer>();
         this.pingSubjects$.push(_subj$);
         const row: TableCell[] = [
           {
-            value: this._titlecase(db.alias) || 'N/A',
+            value: this._titlecase(cron.alias) || 'N/A',
           },
           {
-            value: format(new Date(db.createdAt), 'dd/MM/yyyy '),
+            value: cron.compression?.toUpperCase() || 'NONE',
           },
           {
-            badge: db.enabled ? 'available' : 'unavailable',
+            value: format(new Date(cron.createdAt), 'dd/MM/yyyy '),
           },
           {
-            component: {
-              component: PingComponent,
-              data: {
-                pingType: 'MongoDB',
-                pingServer$: _subj$,
-              },
-              token: PING_DATA_TOKEN,
-            },
+            badge: cron.enabled ? 'available' : 'unavailable',
           },
           {
             html: this._sanitizer
@@ -96,20 +81,9 @@ export class DatabasesComponent implements OnInit {
             </div>
           </td>`),
           },
-          {
-            data: db.uri,
-          },
         ];
         return [...acc, row];
       }, []);
-  }
-
-  private _checkStatus() {
-    this.pingSubjects$.forEach((ping$, i) => {
-      ping$.next({
-        url: this.table[i][this.table[i].length - 1].data,
-      });
-    });
   }
 
   private _titlecase = (str: string) => {

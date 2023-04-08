@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReplaySubject, Subject, tap } from 'rxjs';
 import { ApiHttpService } from 'src/app/modules/api-http';
@@ -58,15 +59,25 @@ export class BackupService {
     return `${this._authService.serverUrl}api/backup/download/${backup._id}?apiKey=${this._authService.apiKey}`;
   }
 
-  public getBackups<T = Backup[]>(id?: string) {
-    return this.apiHttp.get<T>('api/backup/get/' + (id || '')).pipe(
-      tap((r) => {
-        if (id?.length) {
-          return;
-        }
-        this._backups = r as unknown as Backup[];
-        this.backups$.next(r as unknown as Backup[]);
+  public getBackups<T = Backup[]>(o?: { id?: string; limit?: number }) {
+    const params = new HttpParams({
+      fromObject: {
+        limit: o?.limit || 0,
+      },
+    });
+
+    return this.apiHttp
+      .get<T>('api/backup/get/' + (o?.id || ''), {
+        params,
       })
-    );
+      .pipe(
+        tap((r) => {
+          if (o?.id?.length) {
+            return;
+          }
+          this._backups = r as unknown as Backup[];
+          this.backups$.next(r as unknown as Backup[]);
+        })
+      );
   }
 }

@@ -41,7 +41,7 @@ export class NavComponent implements OnInit {
     {
       label: 'cron-jobs',
       svgPaths: ['M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z'],
-      route: '/pages/cron-jobs',
+      route: '/pages/crons/browse',
       hoverClass: 'hover:text-purple-500 dark:hover:text-purple-400',
     },
   ];

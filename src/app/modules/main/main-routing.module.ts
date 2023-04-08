@@ -37,6 +37,12 @@ const routes: Routes = [
         loadChildren: () =>
           import('../backups/backups.module').then((m) => m.BackupsModule),
       },
+      {
+        path: 'crons',
+        canActivate: [ConnectedGuard],
+        loadChildren: () =>
+          import('../crons/crons.module').then((m) => m.CronsModule),
+      },
     ],
   },
 ];

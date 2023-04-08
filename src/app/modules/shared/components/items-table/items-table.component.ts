@@ -33,6 +33,8 @@ export interface TableCell {
 export class ItemsTableComponent implements OnInit {
   @Input() headers: string[] = ['placeholder1', 'placeholder2', 'placeholder3'];
   @Input() rows: TableCell[][] = [];
+  @Input() addItemRoute: string = '';
+  @Input() containerColor = 'muted';
 
   @Output() buttonClicked = new EventEmitter<{
     index: number;
