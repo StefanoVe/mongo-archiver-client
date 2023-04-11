@@ -7,7 +7,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "rm -rf ./dist && npm run build && cp ./Dockerfile ./dist/mongo-archiver-client && cp ./captain-definition ./dist/mongo-archiver-client && tar --strip-components=3 -cvf ./deploy.tar --exclude='*.map' ./dist/mongo-archiver-client/* && read -p 'Caprover Istance: ' givenInstance && caprover deploy -t ./deploy.tar -n $givenInstance -a mongo-archiver-client && rm ./deploy.tar"
   },
   "private": true,
   "dependencies": {
