@@ -13,7 +13,7 @@ export interface ITableRow {
   styleUrls: ['./items-list-widget.component.scss'],
 })
 export class ItemsListWidgetComponent {
-  @Input() items: ITableRow[] = [];
+  @Input() items?: ITableRow[];
   @Input() headers: Partial<[string, string, string]> = [];
   @Input() showMoreRoute = '';
   @Input() showMoreQueryParams: { [key: string]: string } = {};

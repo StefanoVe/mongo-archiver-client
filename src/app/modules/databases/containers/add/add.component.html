@@ -1,0 +1,13 @@
+<div class="center flex-col h-full">
+  <div class="container primary">
+    <div class="mb-10">
+      <h1 class="text-4xl font-bold">Add a Database</h1>
+      <h4 class="text-lg opacity-75">
+        The database to connect to must be a public MongoDB server
+      </h4>
+    </div>
+    <app-database-form
+      (formSubmitted)="handleFormSubmitted($event)"
+    ></app-database-form>
+  </div>
+</div>

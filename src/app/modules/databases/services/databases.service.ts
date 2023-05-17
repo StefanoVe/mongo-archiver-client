@@ -38,4 +38,13 @@ export class DatabasesService {
       })
     );
   }
+
+  public add(database: Partial<Database>) {
+    return this.apiHttp.post<Database>('api/db/add', database).pipe(
+      tap((r) => {
+        this._databases.push(r as unknown as Database);
+        this.databases$.next(this._databases);
+      })
+    );
+  }
 }

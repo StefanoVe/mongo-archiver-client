@@ -1,0 +1,25 @@
+<div class="center">
+  <form [formGroup]="form" class="w-full" (ngSubmit)="submitForm()">
+    <div class="flex space-x-2 w-full">
+      <golden-tailwind-input
+        name="alias"
+        [parent]="form"
+        placeholder="Production DB"
+        label="Alias"
+        class="w-full"
+      ></golden-tailwind-input>
+      <golden-tailwind-input
+        name="uri"
+        [parent]="form"
+        placeholder="mongodb://localhost:27017"
+        label="DB URI"
+        class="w-full"
+      ></golden-tailwind-input>
+    </div>
+    <golden-tailwind-submit-button
+      label="Add Database"
+      [loading]="loading"
+      [invalid]="form.invalid"
+    ></golden-tailwind-submit-button>
+  </form>
+</div>

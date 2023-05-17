@@ -52,7 +52,7 @@
             <tbody
               class="text-sm divide-y divide-gray-200 dark:divide-gray-600"
             >
-              <ng-container *ngIf="!items.length">
+              <ng-container *ngIf="!items?.length">
                 <ng-container [ngTemplateOutlet]="SkeletonRow"></ng-container>
                 <ng-container [ngTemplateOutlet]="SkeletonRow"></ng-container>
                 <ng-container [ngTemplateOutlet]="SkeletonRow"></ng-container>
