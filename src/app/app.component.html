@@ -1,9 +1,7 @@
 <span class="hidden">{{ handleDarkMode() | json }}</span>
 <div [class.dark]="darkMode.enabled">
   <div class="bg-gray-100 dark:bg-app-dark-mode-color-500 min-h-screen">
-    <div
-      class="h-full w-full bg-dotted-spacing-20 bg-dotted-gray-300 dark:bg-dotted-app-dark-mode-color-400"
-    >
+    <div class="h-full w-full background-gradient">
       <div class="p-2 fixed right-0">
         <golden-toggle-dark-mode [showLabel]="false"></golden-toggle-dark-mode>
       </div>

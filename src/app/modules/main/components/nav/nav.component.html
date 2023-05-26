@@ -18,6 +18,7 @@
         *ngFor="let item of upperRoutes"
         [routerLink]="item.route"
         [queryParams]="item.queryParams"
+        [routerLinkActive]="item.activeClass || ''"
         class=" p-1.5 text-gray-700 focus:outline-none transition-colors duration-200 rounded-lg dark:text-gray-200 dark:hover:bg-gray-800 hover:bg-gray-100 smooth {{
           item.hoverClass
         }}"
@@ -35,6 +36,7 @@
       <a
         *ngFor="let item of lowerRoutes"
         [routerLink]="item.route"
+        [routerLinkActive]="item.activeClass || ''"
         [queryParams]="item.queryParams"
         class=" p-1.5 text-gray-700 focus:outline-none transition-colors duration-200 rounded-lg dark:text-gray-200 dark:hover:bg-gray-800 hover:bg-gray-100 smooth {{
           item.hoverClass

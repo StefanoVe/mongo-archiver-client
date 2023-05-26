@@ -6,6 +6,7 @@ interface INavItem {
   route: string;
   queryParams?: { [key: string]: string };
   hoverClass?: string;
+  activeClass?: string;
 }
 
 @Component({
@@ -29,6 +30,7 @@ export class NavComponent implements OnInit {
       ],
       route: '/pages/backups/browse',
       hoverClass: 'hover:text-secondary dark:hover:text-secondary',
+      activeClass: 'text-secondary dark:text-secondary',
     },
     {
       label: 'databases',
@@ -37,12 +39,14 @@ export class NavComponent implements OnInit {
       ],
       route: '/pages/databases/browse',
       hoverClass: 'hover:text-primary dark:hover:text-primary',
+      activeClass: 'text-primary dark:text-primary',
     },
     {
       label: 'cron-jobs',
       svgPaths: ['M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z'],
       route: '/pages/crons/browse',
       hoverClass: 'hover:text-purple-500 dark:hover:text-purple-400',
+      activeClass: 'text-purple-500 dark:text-purple-400',
     },
   ];
 
